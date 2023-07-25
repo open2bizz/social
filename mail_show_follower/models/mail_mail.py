@@ -68,7 +68,7 @@ class MailMail(models.Model):
                 ]
             ).mapped("recipient_ids")
             # if the email has a model, id and it belongs to the portal group
-            if mail.model and mail.res_id and group_portal:
+            if mail.model and mail.res_id and group_portal and not mail.subtype_id.internal:
                 obj = self.env[mail.model].browse(mail.res_id)
                 # those partners are obtained, who do not have a user and
                 # if they do it must be a portal, we exclude internal
